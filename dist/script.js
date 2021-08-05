@@ -1,43 +1,45 @@
 // grab everything we need
-        const priceInput = document.querySelector('[name=price]');
-        const quantityInput =document.querySelector('[name=quantity]');
+internationalNumberFormat = new Intl.NumberFormat('en-US')
+
+        const carsInput = document.querySelector('[name=cars]');
+        const percentInput =document.querySelector('[name=percent]');
         const total = document.querySelector('.total');
         const tree = document.querySelector('.tree')
-        const quantityLabel = document.querySelector('.quantity-label');
-        const priceLabel = document.querySelector('.price-label');
-const price = 0
-const quantity = 0
+        const percentLabel = document.querySelector('.percent-label');
+        const carsLabel = document.querySelector('.cars-label');
+const cars = 0
+const percent = 0
 const treeprice = 0
        // create the functions that we'll need
-        function calculatePieCost() {
-            const quantity = quantityInput.value;
-            const price = priceInput.value;
-            const cost = price * (quantity/100)*1.96;
-            console.log(cost);
-            total.innerText = cost.toFixed() + ' tons of CO2 per year';
+        function calculateCarbonCost() {
+            const percent = percentInput.value;
+            const cars = carsInput.value;
+            const cost = cars * (percent/100)*1.96;
+            console.log(internationalNumberFormat.format(cost));
+            total.innerText = internationalNumberFormat.format(cost.toFixed()) + ' tons of CO2 per year';
           const treecost = cost*1000/21;
-            console.log(treecost);
-           tree.innerText = 'thats equal to ' + treecost.toFixed() + ' trees 🌳 per year';
+            console.log(internationalNumberFormat.format(treecost));
+           tree.innerText = 'that\'s equal to ' + internationalNumberFormat.format(treecost.toFixed()) + ' trees 🌳 per year';
         }
 function calculateTreeCost() {
-            const quantity = quantityInput.value;
-            const price = priceInput.value;
+            const percent = percentInput.value;
+            const cars = carsInput.value;
             
         }
-        function updateQuantityLabel() {
-            const quantity = quantityInput.value;
-            quantityLabel.innerText = quantity +'%';
+        function updatePercentLabel() {
+            const percent = percentInput.value;
+            percentLabel.innerText = percent +'%';
         }
- function updatePriceLabel() {
-            const price = priceInput.value;
-            priceLabel.innerText = price + ' cars 🚗';
+ function updateCarsLabel() {
+            const cars = carsInput.value;
+            carsLabel.innerText = internationalNumberFormat.format(cars) + ' cars 🚗';
         }
         // on first fun
-        calculatePieCost();
+        calculateCarbonCost();
         calculateTreeCost();
 
        // add our event listeners
-        priceInput.addEventListener('input', calculatePieCost);
-        priceInput.addEventListener('input', updatePriceLabel);
-        quantityInput.addEventListener('input', calculatePieCost);
-        quantityInput.addEventListener('input', updateQuantityLabel);
+        carsInput.addEventListener('input', calculateCarbonCost);
+        carsInput.addEventListener('input', updateCarsLabel);
+        percentInput.addEventListener('input', calculateCarbonCost);
+       percentInput.addEventListener('input', updatePercentLabel);
